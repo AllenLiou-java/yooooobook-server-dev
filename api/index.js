@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/api', require('../routes/index'));
+app.use('/auth', require('../routes/auth'));
+app.use('/mail', require('../routes/mail'));
 
 app.listen(PORT, () => {
   console.log('Server on port 3500');
