@@ -1,10 +1,8 @@
 const nodemailer = require('nodemailer');
 const express = require('express');
-const app = express();
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+const router = express.Router();
 
-app.post('/orderConfirm', (req, res) => {
+router.post('/orderConfirm', (req, res) => {
   const orderInfo = req.body;
 
   sendOrderConfirmMail(orderInfo)
@@ -78,4 +76,4 @@ async function sendOrderConfirmMail(orderInfo) {
   return result;
 }
 
-module.exports = app;
+module.exports = router;

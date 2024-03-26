@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const qs = require('querystring');
 const express = require('express');
-const app = express();
+const router = express.Router();
 const axios = require('axios');
 
 const google_client_id = process.env.GOOGLE_CLIENT_ID;
@@ -14,7 +14,7 @@ const google_secret_id = process.env.GOOGLE_SECRET_ID; // 這個一定不能曝�
 const firebaseApiKey = process.env.FIREBASE_API_KEY;
 const process_url = process.env.WEB_URL;
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   const referer = req.headers.referer; // 前端請求過來的路徑
   if (!referer) {
     res.redirect('/');
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
   res.redirect(google_oauth_url);
 });
 
-app.get('/google', async (req, res) => {
+router.get('/google', async (req, res) => {
   // 接收傳送過來的 state
   let referer = req.query.state;
   if (referer.includes('?')) {
@@ -98,4 +98,4 @@ app.get('/google', async (req, res) => {
   );
 });
 
-module.exports = app;
+module.exports = router;
